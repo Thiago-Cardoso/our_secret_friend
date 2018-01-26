@@ -13,24 +13,25 @@ include Devise::Test::ControllerHelpers #include test for devise with helper of 
 
   describe "GET #show" do
     #if campaign exists and owner
-   context "campaing exists" do
-     context "User is the owner of the campaing" do
-       it "Returns success" do
-          campaign = create(:campaign, user: @current_user) #campaign create passed user
-          get :show, params: {id: campaign.id} #get action show controller campaign
-          expect(response).to have_http_status(:success) #suceess
+    context "campaing exists" do
+      context "User is the owner of the campaing" do
+        it "Returns success" do
+          campaign = create(:campaign, user: @current_user)
+          get :show, params: {id: campaign.id}
+          expect(response).to have_http_status(:success)
         end
       end
 
-      #if user ir not the owner exists of the campaign
       context "User is not the owner of the campaign" do
         it "Redirects to root" do
           campaign = create(:campaign)
           get :show, params: {id: campaign.id}
+
           expect(response).to redirect_to('/')
         end
       end
     end
+
 
     #if campaign don't exists
     context "campaign don't exists" do
@@ -48,11 +49,12 @@ include Devise::Test::ControllerHelpers #include test for devise with helper of 
     end
   end
 
-  describe "GET #create" do
+
+  describe "POST #create" do
     before(:each) do
-      #create atributes for campaign
-     @campaign_attributes = attributes_for(:campaign, user: @current_user)
-     post :create, params: {campaign: @campaign_attributes} #do a post
+        #create atributes for campaign
+      @campaign_attributes = attributes_for(:campaign, user: @current_user)
+      post :create, params: {campaign: @campaign_attributes}
     end
 
     #redirect for campaign now
@@ -62,26 +64,20 @@ include Devise::Test::ControllerHelpers #include test for devise with helper of 
     end
 
     #create campaign with data fixed
-    it "Create campaign with right attributes" do
+    it "Create campaign with initial params" do
       expect(Campaign.last.user).to eql(@current_user)
-      expect(Campaign.last.title).to eql(@campaign_attributes[:title])
-      expect(Campaign.last.description).to eql(@campaign_attributes[:description])
+      expect(Campaign.last.title).to eql("Nova Campanha")
+      expect(Campaign.last.description).to eql("Descreva sua campanha...")
       expect(Campaign.last.status).to eql('pending')
     end
 
-    #create campaign with member associeted
+      #create campaign with member associeted
     it "Create campaign with owner associated as a member" do
       expect(Campaign.last.members.last.name).to eql(@current_user.name)
       expect(Campaign.last.members.last.email).to eql(@current_user.email)
     end
   end
 
-  describe "GET #update" do
-    it "returns http success" do
-      get :update
-      expect(response).to have_http_status(:success)
-    end
-  end
 
     describe "DELETE #destroy" do
      before(:each) do
@@ -105,7 +101,7 @@ include Devise::Test::ControllerHelpers #include test for devise with helper of 
      end
    end
 
-   escribe "PUT #update" do
+   describe "PUT #update" do
     before(:each) do
       @new_campaign_attributes = attributes_for(:campaign)
       request.env["HTTP_ACCEPT"] = 'application/json'

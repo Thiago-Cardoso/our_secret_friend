@@ -1,11 +1,13 @@
 class Campaign < ApplicationRecord
-  belongs_to :user
-  has_many :members, dependent: :destroy #one campaign has many member, dependent according remove
+
 
  #before create call method set_status in pending
-  before_create :set_status
+  before_validation :set_status, on: :create
   #before create call method
-  before_create :set_member
+  before_validation :set_member, on: :create
+
+  belongs_to :user
+  has_many :members, dependent: :destroy #one campaign has many member, dependent according remove
   enum status: [:pending, :finished]
   validates :title, :description, :user, :status, presence: true
 
