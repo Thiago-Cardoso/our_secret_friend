@@ -11,6 +11,13 @@ class Campaign < ApplicationRecord
   enum status: [:pending, :finished]
   validates :title, :description, :user, :status, presence: true
 
+  #query for number of members
+  def count_opened
+   self.members.where(open: true).count
+  end
+
+  private
+
   def set_status
     self.status = :pending # when not do raffle
   end
