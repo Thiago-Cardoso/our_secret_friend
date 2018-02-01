@@ -42,3 +42,6 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Ignore upload prod env file
+.env-prod
