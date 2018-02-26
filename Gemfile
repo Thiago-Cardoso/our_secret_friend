@@ -43,9 +43,12 @@ gem 'sidekiq'
 gem 'inky-rb', require: 'inky'
 gem 'premailer-rails'
 
+
+
 group :test do
   gem "factory_bot_rails"
   gem "ffaker"
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development, :test do

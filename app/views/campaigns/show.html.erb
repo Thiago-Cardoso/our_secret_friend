@@ -51,6 +51,7 @@
           <div class="card-content col s12">
 
           <div class="member_list">
+          <%= form_tag member_path, html: {class: "col s12 update_member"} do |f| %>
             <% @campaign.members.each do |m| %>
               <div class="member" id="member_<%= m.id %>">
                 <div class="row">
@@ -72,8 +73,10 @@
                   </div>
                 </div>
               </div>
+                <% end %>
             <% end %>
           </div>
+
 
           <%= form_for(Member.new) do |f| %>
             <div class="member">
@@ -95,18 +98,33 @@
     </div>
   </div>
 
-  <div class="row btn-actions">
-    <div class="col s12 center">
-      <div class="col s6 m3 offset-m3 l2 offset-l4">
-        <%= form_for @campaign, method: 'delete', html: {class: 'remove_campaign'} do |f| %>
-          <button type='submit' class="waves-effect waves-light btn grey">Remover</button>
-        <% end %>
-      </div>
-      <div class="col s6 m3 l3">
-        <%= form_tag(raffle_campaign_path(@campaign), method: 'post', class: 'raffle_campaign') do %>
-          <button type='submit' class="waves-effect waves-light btn red">Sortear e enviar</button>
-        <% end %>
+    <div class="row btn-actions">
+      <div class="col s12 center">
+        <div class="col s6 m3 offset-m3 l2 offset-l4">
+
+              <a  href="#modal1" class="waves-effect waves-light btn modal-trigger">Remover</a>
+
+        </div>
+        <div class="col s6 m3 l3">
+          <%= form_tag(raffle_campaign_path(@campaign), method: 'post', class: 'raffle_campaign') do %>
+            <button type='submit' class="waves-effect waves-light btn red">Sortear e enviar</button>
+          <% end %>
+        </div>
       </div>
     </div>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+      <%= form_for @campaign, method: 'delete', html: {class: 'remove_campaign'} do |f| %>
+          <div class="modal-content">
+            <h4>Você deseja deletar esta campanha?</h4>
+          </div>
+          <div class="modal-footer">
+            <a id="close" class="modal-action modal-close waves-effect waves-red btn-flat ">Não</a>
+            <button type='submit' class="waves-effect waves-light btn grey">Sim</button>
+          </div>
+      <% end %>
+    </div>
+
   </div>
 </div>

@@ -18,7 +18,7 @@ services:
     depends_on:
       - 'postgres'
       - 'redis'
-      - 'website'
+      - 'app'
     build: .
     command: bash start_jobs
     volumes:
@@ -26,7 +26,7 @@ services:
     volumes_from:
       - box
 
-  website:
+  app:
     depends_on:
       - 'postgres'
       - 'redis'
@@ -47,8 +47,8 @@ services:
   mailcatcher:
     image: yappabe/mailcatcher
     ports:
-    - 1025:1025
-    - 1080:1080
+      - 1025:1025
+      - 1080:1080
 
 volumes:
   redis:

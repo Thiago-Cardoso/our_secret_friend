@@ -3,6 +3,7 @@ class Member < ApplicationRecord
   after_destroy :set_campaign_pending
   #it is required, name, email, campaign
   validates :name, :email, :campaign, presence: true
+  validates_uniqueness_of :email, scope: :campaign, :message => "Este e-mail já foi adicionado a campanha"
 
 #look the email is open
 #token url variable is randon
