@@ -16,6 +16,6 @@ class CampaignMailer < ApplicationMailer
     @campaign = campaign
     @member = member.user
     @friend = friend
-    mail to: @member.email, subject: "Nosso Amigo Secreto - Error email : #{@campaign.title}"
+    mail to: @member.email, subject: "Nosso Amigo Secreto - Falha no processamento do email tente novamente: #{@campaign.title}"
   end
 end
