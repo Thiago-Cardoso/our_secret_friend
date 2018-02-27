@@ -13,7 +13,7 @@ class Campaign < ApplicationRecord
 
   #query for number of members
   def count_opened
-   self.members.where(open: true).count
+    self.members.where(open: true).count
   end
 
   private
