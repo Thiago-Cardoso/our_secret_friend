@@ -5,7 +5,7 @@ include Devise::Test::ControllerHelpers #include test for devise with helper of 
 
   before(:each) do
   # request.env["HTTP_ACCEPT"] = 'application/json'
-
+  Design patterns
   @request.env["devise.mapping"] = Devise.mappings[:user] #mapping devise
   @current_user = FactoryBot.create(:user) #create user utilizing factory user
   sign_in @current_user #do sign with

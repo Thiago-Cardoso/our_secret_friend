@@ -16,20 +16,19 @@ $(document).on 'turbolinks:load', -> #after page loading
           Materialize.toast('Problema na atualização da Campanha', 4000, 'red') #error
     return false
 
-# event blur when focusout call submit
-  $('.update_member input').bind 'blur', ->
-    #force submit
-    $('.update_member').submit()
-    #send submit ajax for update
-  $('.update_member').on 'submit', (e) ->
-    $.ajax e.target.action,
+  $('.member_update').on 'change', 'div.member_id', (e) ->
+    $.ajax '/members/' + e.currentTarget.id,
         type: 'PUT'
         dataType: 'json',
-        data: $(".update_member").serialize() #get all fields
+        data: { member: {
+                name: $("#name_" + e.currentTarget.id).val(),
+                email: $("#email_" + e.currentTarget.id).val(),
+                campaign_id: $('#campaign_id').val()
+              } }
         success: (data, text, jqXHR) ->
-          Materialize.toast('membro atualizado', 4000, 'green') #sucess
+          Materialize.toast('Membro atualizado', 4000, 'green')
         error: (jqXHR, textStatus, errorThrown) ->
-          Materialize.toast('Problema na atualização do membro', 4000, 'red') #error
+          Materialize.toast('Problema na atualização da Membro', 4000, 'red')
     return false
 
     #send submit ajax for delete
