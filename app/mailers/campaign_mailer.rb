@@ -7,15 +7,13 @@ class CampaignMailer < ApplicationMailer
   #
   def raffle(campaign, member, friend)
     @campaign = campaign
-    @member = member
+    @member = membraffle_errorer
     @friend = friend
     mail to: @member.email, subject: "Nosso Amigo Secreto: #{@campaign.title}"
   end
 
-  def raffleOwner(campaign, member, friend)
+  def raffle_error(campaign)
     @campaign = campaign
-    @member = member.user
-    @friend = friend
-    mail to: @member.email, subject: "Nosso Amigo Secreto - Falha no processamento do email tente novamente: #{@campaign.title}"
+    mail to: @campaign.user.email, subject: "Erro no sorteio do Nosso Amigo Secreto: #{@campaign.title}"
   end
 end
