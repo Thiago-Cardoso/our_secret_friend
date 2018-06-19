@@ -15,7 +15,7 @@ class CampaignRaffleJob < ApplicationJob
       #when return false or problem in server
       if results == false
         #   Send mail to owner of campaign (desafio)
-           CampaignMailer.raffleOwner(campaign, r.first, r.last).deliver_now #now send
+           CampaignMailer.raffle_error(campaign, r.first, r.last).deliver_now #now send
         end
   end
 end
