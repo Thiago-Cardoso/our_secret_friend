@@ -72,7 +72,7 @@ GEM
       factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
     ffaker (2.8.1)
-    ffi (1.9.18)
+    ffi (1.15.0)
     foundation_emails (2.2.1.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
